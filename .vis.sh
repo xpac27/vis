@@ -11,10 +11,11 @@
 function vis
 {
     if [[ "$1" = "" ]]; then
-        if [[ "`ls ~/.vim/sessions/ | grep $branch`" = "" ]]; then
-            vim -c 'SessionSaveAs '`git_session_name`
+        session_name=`git_session_name`
+        if [[ "`ls ~/.vim/sessions/ | grep $session_name`" = "" ]]; then
+            vim -c 'SessionSaveAs '$session_name
         else
-            vim -c 'SessionOpen '`git_session_name`
+            vim -c 'SessionOpen '$session_name
         fi
     else
         git co $1  && vim -c 'SessionOpen '$1
@@ -24,6 +25,12 @@ function vis
 # Get a proper session name for vim
 git_session_name()
 {
-   echo "$(git config remote.origin.url)_$(git branch | grep \* | cut -f 2 -d ' ')"$
+   echo "$(git config remote.origin.url | sed 's/\//_/g' | sed 's/\@/_/g' | sed 's/:/_/g' | sed 's/\./_/g')_`git_branch_name`"
+}
+
+# Get git branch name
+git_branch_name()
+{
+   git branch | grep \* | cut -f 2 -d ' '
 }
 
