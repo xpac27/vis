@@ -24,6 +24,6 @@ function vis
 # Get a proper session name for vim
 git_session_name()
 {
-   echo "$(pwd | sed 's/\//_/g')_$(git branch | grep \* | cut -f 2 -d ' ')"
+   echo "$(git config remote.origin.url)_$(git branch | grep \* | cut -f 2 -d ' ')"$
 }
 
