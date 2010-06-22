@@ -1,0 +1,23 @@
+VIS - The ultimate vim command launcher !
+
+Vim Instant Sight is a commande that will allways open vim in a session related to the current branch of the git repository you are in.
+
+
+// INSTALL
+
+Import this script in your .bashrc
+
+
+// REQUIREMENTS
+
+You'll need:
+- vim SessionMan : http://www.vim.org/scripts/script.php?script_id=2010
+- git (of course)
+- vim (of course)
+
+
+// USAGE
+
+- type 'vis' and that's all, it will take care of everything
+- you can also type 'vis somesession' to force open/create a specific session
+
