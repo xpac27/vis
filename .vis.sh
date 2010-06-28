@@ -10,7 +10,10 @@
 # Open vim in a session related to this repository's current branch
 function vis
 {
-    if [[ "$1" = "" ]]; then
+    if [[ "$1" = "-f" ]]; then
+        session_name=`git_session_name`
+        vim -c 'SessionSaveAs '$session_name
+    else if [[ "$1" = "" ]]; then
         session_name=`git_session_name`
         if [[ "`ls ~/.vim/sessions/ | grep $session_name`" = "" ]]; then
             vim -c 'SessionSaveAs '$session_name
