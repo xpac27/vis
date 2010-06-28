@@ -13,16 +13,18 @@ function vis
     if [[ "$1" = "-f" ]]; then
         session_name=`git_session_name`
         vim -c 'SessionSaveAs '$session_name
-    else if [[ "$1" = "" ]]; then
-        session_name=`git_session_name`
-        if [[ "`ls ~/.vim/sessions/ | grep $session_name`" = "" ]]; then
-            vim -c 'SessionSaveAs '$session_name
-        else
-            vim -c 'SessionOpen '$session_name
-        fi
     else
-        git co $1  && vim -c 'SessionOpen '$1
-   fi
+        if [[ "$1" = "" ]]; then
+            session_name=`git_session_name`
+            if [[ "`ls ~/.vim/sessions/ | grep $session_name`" = "" ]]; then
+                vim -c 'SessionSaveAs '$session_name
+            else
+                vim -c 'SessionOpen '$session_name
+            fi
+        else
+            git co $1  && vim -c 'SessionOpen '$1
+        fi
+    fi
 }
 
 # Get a proper session name for vim
